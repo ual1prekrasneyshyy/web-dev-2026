@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>News portal</h1>
+<div style="border: 1px solid blue; border-radius: 5px; margin-bottom: 10px;" th:each="n : ${news}">
+    <h3 th:text="${n.title}"></h3>
+    <p th:text="${n.content}"></p>
+    <p><span th:text="${n.views}"> views</p>
+    <p>Posted at <span th:text="${n.postedAt}"></span></p>
+</div>
+</body>
+</html>

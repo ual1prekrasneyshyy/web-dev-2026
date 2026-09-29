@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: HW1
+  datasource:
+    url: jdbc:postgresql://db:5432/${DB_NAME
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+      hibernate:
+        ddl-auto: none
+
+  liquibase:
+    change-log: changelog/changelog-master.xml
+
+
