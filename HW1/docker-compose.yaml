@@ -1,6 +1,15 @@
 services:
   app:
     build: .
+    container_name: app-container
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=${PG_DB}
+      - DB_USER=${PG_USER}
+      - DB_PASSWORD=${PG_PASSWORD}
+    ports:
+      - "8080:8080"
 
   db:
     image: postgres
