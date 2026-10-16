@@ -1,0 +1,27 @@
+services:
+  app:
+    build: .
+    container_name: app-container
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USR}
+      - DB_PASSWORD=${DB_PWD}
+      - DB_PORT=${DB_PORT}
+    ports:
+      - "8080:8080"
+
+  db:
+    image: mysql
+    container_name: db-container
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PWD}
+      - MYSQL_DATABASE=${DB_NAME}
+    ports:
+      - "3306:${DB_PORT}"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:

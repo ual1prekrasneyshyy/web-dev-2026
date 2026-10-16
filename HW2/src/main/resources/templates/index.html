@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>News portal</h1>
+<div style="width: 50%; border: 1px solid blue; border-radius: 5px; margin-bottom: 10px; padding: 15px 10px;">
+    <h2>Add Article</h2>
+    <form method="post" th:action="@{/add}">
+        <label style="margin-bottom: 10px;">
+            Title:
+            <br>
+            <input type="text" name="title">
+        </label>
+        <br>
+        <label style="margin-bottom: 10px;">
+            Content:
+            <br>
+            <textarea name="content"></textarea>
+        </label>
+        <br>
+        <button type="submit" style="text-decoration: None; border: 1px solid green; border-radius: 10px; background-color: green; color: white; font-size: 14px; padding: 10px;">Submit</button>
+    </form>
+</div>
+<div style="width: 60%; border: 1px solid blue; border-radius: 5px; margin-bottom: 10px; padding: 15px 10px;" th:each="n : ${news}">
+    <h3 th:text="${n.title}"></h3>
+    <p th:text="${n.content}"></p>
+    <p><span th:text="${n.views}"> views</span></p>
+    <p>Posted at <span th:text="${n.postedAt}"></span></p>
+    <a th:href="@{'/view/' + ${n.id}}" style="text-decoration: None; border: 1px solid blue; border-radius: 10px; background-color: green; color: white; font-size: 14px; padding: 10px;">Details</a>
+</div>
+</body>
+</html>
