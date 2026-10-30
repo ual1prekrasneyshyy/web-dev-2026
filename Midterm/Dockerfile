@@ -1,6 +1,6 @@
-FROM openjdk:28-ea-oracle
+FROM openjdk:27-ea-jdk
 WORKDIR /app
-CMD ./gradlew clean
-CMD ./gradlew build
+#COPY . .
+#RUN ./gradlew build
 COPY ./build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]

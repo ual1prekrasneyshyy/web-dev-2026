@@ -1,6 +1,7 @@
 package kz.kbtu.webdev.midterm.controller.rest;
 
-import kz.kbtu.webdev.midterm.entity.News;
+import kz.kbtu.webdev.midterm.dto.SaveArticleDto;
+import kz.kbtu.webdev.midterm.dto.ViewArticleDto;
 import kz.kbtu.webdev.midterm.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,52 +19,51 @@ public class NewsController {
 
     @GetMapping
     public ResponseEntity<?> getAllNews() {
-        List<News> news = newsService.loadAllNews();
+        List<ViewArticleDto> dto = newsService.loadAllNews();
 
-        if(news.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if(dto.isEmpty()){
+            return new ResponseEntity<>("Database empty", HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(news, HttpStatus.OK);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> viewArticle(@PathVariable Long id) {
-        News n = newsService.viewDetails(id);
+        ViewArticleDto n = newsService.viewDetails(id);
 
         if(Objects.isNull(n)){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Article not found", HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(n, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> addArticle(@RequestBody News dto) {
-        News n = newsService.addArticle(dto);
+    public ResponseEntity<?> addArticle(@RequestBody SaveArticleDto dto) {
+        ViewArticleDto n = newsService.addArticle(dto);
         return new ResponseEntity<>(n, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateArticle(@PathVariable Long id, @RequestBody News dto) {
-        News n = newsService.updateArticle(id, dto);
+    public ResponseEntity<?> updateArticle(@PathVariable Long id, @RequestBody SaveArticleDto dto) {
+        ViewArticleDto n = newsService.updateArticle(id, dto);
 
         if(Objects.isNull(n)){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Article not found", HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(n, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    @GetMapping("/{id}")
     public ResponseEntity<?> deletedArticle(@PathVariable Long id) {
         boolean deleted = newsService.deleteArticle(id);
 
         if(deleted){
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Article has been successfully deleted", HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Article not found", HttpStatus.NOT_FOUND);
     }
 }

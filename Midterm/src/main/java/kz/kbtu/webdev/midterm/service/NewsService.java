@@ -1,6 +1,9 @@
 package kz.kbtu.webdev.midterm.service;
 
+import kz.kbtu.webdev.midterm.dto.SaveArticleDto;
+import kz.kbtu.webdev.midterm.dto.ViewArticleDto;
 import kz.kbtu.webdev.midterm.entity.News;
+import kz.kbtu.webdev.midterm.mapper.ArticleMapper;
 import kz.kbtu.webdev.midterm.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,17 +17,24 @@ public class NewsService {
     @Autowired
     private NewsRepository newsRepository;
 
-    public List<News> loadAllNews(){
-        return this.newsRepository.findAll();
+    @Autowired
+    private ArticleMapper articleMapper;
+
+    public List<ViewArticleDto> loadAllNews(){
+        List<News> news = this.newsRepository.findAll();
+        List<ViewArticleDto> dto = this.articleMapper.toDtoList(news);
+        return dto;
     }
 
-    public News addArticle(News n){
+    public ViewArticleDto addArticle(SaveArticleDto dto){
+        News n = this.articleMapper.toEntity(dto);
         n.setViews(0);
         n.setPostedAt(LocalDateTime.now());
-        return this.newsRepository.save(n);
+        News savedArticle = this.newsRepository.save(n);
+        return this.articleMapper.toDto(savedArticle);
     }
 
-    public News viewDetails(Long id){
+    public ViewArticleDto viewDetails(Long id){
         Optional<News> o = this.newsRepository.findById(id);
 
         if(o.isEmpty()){
@@ -33,10 +43,11 @@ public class NewsService {
 
         News n = o.get();
         n.setViews(n.getViews() + 1);
-        return this.newsRepository.save(n);  /// 1 more views should be saved
+        News processedArticle = this.newsRepository.save(n);  /// 1 more views should be saved
+        return this.articleMapper.toDto(processedArticle);
     }
 
-    public News updateArticle(Long id, News dto){
+    public ViewArticleDto updateArticle(Long id, SaveArticleDto dto){
         Optional<News> o = this.newsRepository.findById(id);
 
         if(o.isEmpty()){
@@ -49,7 +60,8 @@ public class NewsService {
         n.setContent(dto.getContent());
         ///  Amount of views can not be changed
         ///  Post date can not be changed
-        return this.newsRepository.save(n);
+        News savedArticle = this.newsRepository.save(n);
+        return this.articleMapper.toDto(savedArticle);
     }
 
     public boolean deleteArticle(Long id){
