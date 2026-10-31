@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: SpaceBountyHunters
+
+  datasource:
+    url: jdbc:mysql://db:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+server:
+  port: ${APP_PORT}

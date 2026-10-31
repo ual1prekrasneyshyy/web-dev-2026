@@ -1,0 +1,28 @@
+services:
+  app:
+    build: .
+    container_name: app-container-for-midterm-1
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USR}
+      - DB_PASSWORD=${DB_PWD}
+      - DB_PORT=${DB_PORT}
+      - APP_PORT=${APP_PORT}
+    ports:
+      - "${APP_EXTERNAL_PORT}:${APP_PORT}"
+
+  db:
+    image: mysql
+    container_name: db-container-for-midterm-1
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=midterm_project
+    ports:
+      - "${DB_EXTERNAL_PORT}:${DB_PORT}"
+    volumes:
+      - mysql-database-data:/var/lib/mysql
+
+volumes:
+  mysql-database-data:
