@@ -23,7 +23,9 @@ public class WantedCriminal {
     @Column(nullable = false, unique = true)
     private String nickname;
     private int reward;
-    ///
+
+    @Column(name = "last_know_coordinate")
+    private String lastKnownCoordinate;
     private int difficulty;
     private boolean armed;
 

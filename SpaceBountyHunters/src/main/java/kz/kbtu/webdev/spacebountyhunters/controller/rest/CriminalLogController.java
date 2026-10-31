@@ -1,5 +1,6 @@
 package kz.kbtu.webdev.spacebountyhunters.controller.rest;
 
+import kz.kbtu.webdev.spacebountyhunters.dto.CriminalDto;
 import kz.kbtu.webdev.spacebountyhunters.entity.WantedCriminal;
 import kz.kbtu.webdev.spacebountyhunters.service.CriminalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,17 @@ public class CriminalLogController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getCriminalById(@PathVariable Long id) {
         WantedCriminal criminal = criminalService.getCriminalById(id);
+
+        if(Objects.isNull(criminal)){
+            return new ResponseEntity<>("Criminal not found", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(criminal, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> addCriminal(@RequestParam CriminalDto dto) {
+        WantedCriminal criminal = criminalService.addCriminal(dto);
 
         if(Objects.isNull(criminal)){
             return new ResponseEntity<>("Criminal not found", HttpStatus.OK);
