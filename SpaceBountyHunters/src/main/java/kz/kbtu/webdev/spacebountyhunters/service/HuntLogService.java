@@ -57,7 +57,9 @@ public class HuntLogService {
 
         HuntLog log = o.get();
 
-        if(log.getCriminal().
+        if(!log.getCriminal().getId().equals(dto.getCriminalId())){
+            return null;
+        }
 
         log.setNotes(dto.getNotes());
         log.setSuccess(dto.getSuccess());

@@ -1,5 +1,6 @@
 package kz.kbtu.webdev.spacebountyhunters.controller.rest;
 
+import kz.kbtu.webdev.spacebountyhunters.dto.SaveLogDto;
 import kz.kbtu.webdev.spacebountyhunters.entity.HuntLog;
 import kz.kbtu.webdev.spacebountyhunters.service.HuntLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,35 @@ public class HuntLogController {
     }
 
     @PostMapping
-    public Re
+    public ResponseEntity<?> addLog(@RequestBody SaveLogDto dto) {
+        HuntLog log = huntLogService.addLog(dto);
+
+        if(Objects.isNull(log)) {
+            return new ResponseEntity<>("Criminal not found", HttpStatus.NOT_FOUND);
+        }
+
+        return new  ResponseEntity<>(log, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> addLog(@PathVariable Long id, @RequestBody SaveLogDto dto) {
+        HuntLog log = huntLogService.updateLog(id, dto);
+
+        if(Objects.isNull(log)) {
+            return new ResponseEntity<>("Log not found", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(log, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteLog(@PathVariable Long id) {
+        boolean deleted = huntLogService.deleteLog(id);
+
+        if(deleted) {
+            return new  ResponseEntity<>("log has been deleted", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("Log not found", HttpStatus.NOT_FOUND);
+    }
 }
