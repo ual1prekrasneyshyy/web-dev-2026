@@ -42,5 +42,5 @@ Update log:
 Delete log:
 ![Снимок экрана от 2026-10-31 14-52-08.png]
 
-The swagger is avaliable by the link: http://localhost:8082/swagger-ui/index.html
+The swagger is available by the link: http://localhost:8082/swagger-ui/index.html
 The specification: http://localhost:8082/v3/api-docs
