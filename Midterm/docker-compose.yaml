@@ -22,7 +22,7 @@ services:
     ports:
       - "${DB_EXTERNAL_PORT}:${DB_PORT}"
     volumes:
-      - database-data:/var/lib/mysql
+      - ms-db-data:/var/lib/mysql
 
 volumes:
-  database-data:
+  ms-db-data:
