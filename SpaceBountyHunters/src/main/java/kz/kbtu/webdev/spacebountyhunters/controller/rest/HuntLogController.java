@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/api/hunts")
+@RequestMapping("/api/hunts/")
 public class HuntLogController {
     @Autowired
     private HuntLogService huntLogService;
