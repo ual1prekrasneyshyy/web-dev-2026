@@ -57,10 +57,10 @@ public class CustomCriminalRepositoryImpl implements CustomCriminalRepository {
 
         if(Objects.nonNull(sortOrder)) {
             if(sortOrder.equals("reward")) {
-                criteriaQuery.orderBy(criteriaBuilder.asc(root.get("sortOrder")));
+                criteriaQuery.orderBy(criteriaBuilder.asc(root.get("reward")));
             }
             if(sortOrder.equals("-reward")) {
-                criteriaQuery.orderBy(criteriaBuilder.desc(root.get("sortOrder")));
+                criteriaQuery.orderBy(criteriaBuilder.desc(root.get("reward")));
             }
         }
 
