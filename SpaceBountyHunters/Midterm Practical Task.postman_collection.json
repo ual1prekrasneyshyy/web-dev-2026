@@ -1,0 +1,265 @@
+{
+  "info": {
+    "_postman_id": "60de074c-9388-4890-a866-9f77ece12da4",
+    "name": "Midterm Practical Task",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "14283677"
+  },
+  "item": [
+    {
+      "name": "Add Criminal",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\n  \"name\": \"Kuandyk\",\n  \"nickname\": \"Kolya\",\n  \"reward\": 900,\n  \"lastKnownCoordinate\": \"North\",\n  \"difficulty\": 3,\n  \"armed\": false,\n  \"hasCrew\": true,\n  \"escapeMaster\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/criminals/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "criminals",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View all criminals",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/criminals/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "criminals",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Filter Criminals",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/criminals/?min_reward=700&max_reward=1000&armed=true&sort=-reward",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "criminals",
+            ""
+          ],
+          "query": [
+            {
+              "key": "min_reward",
+              "value": "700"
+            },
+            {
+              "key": "max_reward",
+              "value": "1000"
+            },
+            {
+              "key": "armed",
+              "value": "true"
+            },
+            {
+              "key": "sort",
+              "value": "-reward"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View criminal details",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/criminals/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "criminals",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View all hunt logs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/hunts/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "hunts",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add log",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"criminalId\": 5,\n  \"success\": false,\n  \"notes\": \"Be more accurate!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/hunts/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "hunts",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View log by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/hunts/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "hunts",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Try to view log with fake ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/hunts/1000",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "hunts",
+            "1000"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update log",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"criminalId\": 1,\n  \"success\": true,\n  \"notes\": \"Refighted\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/hunts/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "hunts",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete log",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/hunts/11",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "hunts",
+            "11"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
