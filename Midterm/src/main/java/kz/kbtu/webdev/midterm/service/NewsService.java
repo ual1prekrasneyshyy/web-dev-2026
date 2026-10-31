@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -20,8 +21,8 @@ public class NewsService {
     @Autowired
     private ArticleMapper articleMapper;
 
-    public List<ViewArticleDto> loadAllNews(){
-        List<News> news = this.newsRepository.findAll();
+    public List<ViewArticleDto> loadAllNews(String titleKey){
+        List<News> news = Objects.nonNull(titleKey) ? this.newsRepository.findAllByTitleContainingIgnoreCase(titleKey) : this.newsRepository.findAll();
         List<ViewArticleDto> dto = this.articleMapper.toDtoList(news);
         return dto;
     }

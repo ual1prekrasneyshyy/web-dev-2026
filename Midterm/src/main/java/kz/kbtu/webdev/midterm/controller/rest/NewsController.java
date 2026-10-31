@@ -18,8 +18,8 @@ public class NewsController {
     private NewsService newsService;
 
     @GetMapping
-    public ResponseEntity<?> getAllNews() {
-        List<ViewArticleDto> dto = newsService.loadAllNews();
+    public ResponseEntity<?> getAllNews(@RequestParam(required = false) String title) {
+        List<ViewArticleDto> dto = newsService.loadAllNews(title);
 
         if(dto.isEmpty()){
             return new ResponseEntity<>("Database empty", HttpStatus.NO_CONTENT);
