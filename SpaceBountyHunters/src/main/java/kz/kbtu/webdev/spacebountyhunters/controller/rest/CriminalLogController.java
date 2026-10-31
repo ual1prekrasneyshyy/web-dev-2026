@@ -47,7 +47,7 @@ public class CriminalLogController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addCriminal(@RequestParam CriminalDto dto) {
+    public ResponseEntity<?> addCriminal(@RequestBody CriminalDto dto) {
         WantedCriminal criminal = criminalService.addCriminal(dto);
 
         if(Objects.isNull(criminal)){
