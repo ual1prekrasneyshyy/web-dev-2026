@@ -16,6 +16,7 @@ import java.util.Set;
 @Setter
 public class Group extends BaseEntity {
     private String name;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Course> courses;
 

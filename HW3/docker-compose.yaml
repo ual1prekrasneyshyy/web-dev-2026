@@ -1,0 +1,28 @@
+services:
+  web-app:
+    build: .
+    container_name: my-web-app
+    depends_on:
+      - db-storage
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USR=${DB_USR}
+      - DB_PWD=${DB_PWD}
+      - DB_PORT=${DB_INTERNAL_PORT}
+    ports:
+      - "8888:8080"
+
+  db-storage:
+    image: postgres
+    container_name: my-db-storage
+    environment:
+      - POSTGRES_USER=${DB_USR}
+      - POSTGRES_PASSWORD=${DB_PWD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "${DB_EXTERNAL_PORT}:${DB_INTERNAL_PORT}"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:

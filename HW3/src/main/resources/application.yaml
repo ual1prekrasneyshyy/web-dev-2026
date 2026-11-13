@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: HW3
+
+  datasource:
+    url: jdbc:postgresql://db-storage:${DB_PORT}/${DB_NAME}
+    username: ${DB_USR}
+    password: ${DB_PWD}
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+  flyway:
+    locations: classpath:db/migration
+    enabled: true
+    baseline-on-migrate: true
