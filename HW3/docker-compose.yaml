@@ -10,7 +10,7 @@ services:
       - DB_PWD=${DB_PWD}
       - DB_PORT=${DB_INTERNAL_PORT}
     ports:
-      - "8888:8080"
+      - "${APP_EXTERNAL_PORT}:${APP_INTERNAL_PORT}"
 
   db-storage:
     image: postgres

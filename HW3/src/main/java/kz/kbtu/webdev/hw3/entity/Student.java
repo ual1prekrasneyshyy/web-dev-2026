@@ -6,15 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Entity
 @Table(name = "students")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Student extends BaseEntity {
+public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "students_id_seq")
+    private Long id;
     private String username;
     @Column(name = "full_name")
     private String fullName;

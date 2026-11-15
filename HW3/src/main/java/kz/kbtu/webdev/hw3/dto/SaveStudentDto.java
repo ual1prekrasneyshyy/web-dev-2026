@@ -1,6 +1,11 @@
 package kz.kbtu.webdev.hw3.dto;
 
-public class AddStudentDto {
+import lombok.Setter;
+import lombok.Getter;
+
+@Getter
+@Setter
+public class SaveStudentDto {
     private String nickName;
     private String fullName;
     private double gpa;

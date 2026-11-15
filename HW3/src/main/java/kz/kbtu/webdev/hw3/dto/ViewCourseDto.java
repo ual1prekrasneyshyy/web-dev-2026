@@ -8,8 +8,9 @@ import java.util.Set;
 @Builder
 @Getter
 public class ViewCourseDto {
+    private Long courseId;
     private String courseCode;
     private String courseName;
-    private String courseDescription;
-    private int courseCredits;
+    private String description;
+    private int credits;
 }

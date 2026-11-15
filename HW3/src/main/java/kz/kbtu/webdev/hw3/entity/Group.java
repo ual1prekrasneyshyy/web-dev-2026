@@ -14,10 +14,18 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Group extends BaseEntity {
+public class Group {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "groups_id_seq")
+    private Long id;
     private String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "groups_courses",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
     private Set<Course> courses;
 
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)

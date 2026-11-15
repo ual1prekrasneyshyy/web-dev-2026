@@ -3,7 +3,7 @@ package kz.kbtu.webdev.hw3.dto;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.List;
+import java.util.Set;
 
 @Builder
 @Getter
@@ -13,5 +13,5 @@ public class ViewStudentDto {
     private String fullName;
     private double gpa;
     private String groupName;
-    private List<String> takenCourses;
+    private Set<String> takenCourses;
 }
