@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,8 @@ import java.util.Set;
 @Setter
 public class Group {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "groups_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen-gr-id")
+    @SequenceGenerator(name = "gen-gr-id", sequenceName = "groups_id_seq", allocationSize = 1)
     private Long id;
     private String name;
 
@@ -26,8 +28,8 @@ public class Group {
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    private Set<Course> courses;
+    private Set<Course> courses = new HashSet<>();
 
     @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
-    private Set<Student> students;
+    private Set<Student> students = new HashSet<>();
 }

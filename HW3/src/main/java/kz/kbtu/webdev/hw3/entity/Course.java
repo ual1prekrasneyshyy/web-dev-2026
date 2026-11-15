@@ -14,7 +14,8 @@ import lombok.Setter;
 @Setter
 public class Course {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courses_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen-course-id")
+    @SequenceGenerator(name = "gen-course-id", sequenceName = "courses_id_seq", allocationSize = 1)
     private Long id;
     private String code;
     private String name;
